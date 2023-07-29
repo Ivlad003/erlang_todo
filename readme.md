@@ -1,3 +1,5 @@
+Sure! Here's an updated version of the README.md file with additional information about the Erlang libraries used in the project and how to include them in the index.html file:
+
 # Erlang Todo App
 
 ## Table of Contents
@@ -7,6 +9,8 @@
 - [Running the Application](#running-the-application)
   - [Production](#production)
   - [Development](#development)
+- [Erlang Libraries Used](#erlang-libraries-used)
+- [Include Libraries in index.html](#include-libraries-in-indexhtml)
 
 ## Introduction
 
@@ -83,15 +87,19 @@ To run the application in development mode, follow these steps:
    rebar3 shell
    ```
 
-## Docker Configuration
+## Erlang Libraries Used
 
-You can also run the application using Docker with a PostgreSQL database. Use the following Docker command to set up the database:
+The Erlang Todo App utilizes the following libraries:
 
-```
-docker run --name db -e POSTGRES_DB=todo_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_PORT=5432 -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql -p 5432:5432 -d postgres:13
-```
+- [Cowboy](https://github.com/ninenines/cowboy): A small, fast, and flexible HTTP server for Erlang.
+- [epgsql](https://github.com/epgsql/epgsql): A PostgreSQL database driver for Erlang.
+- [jsx](https://github.com/talentdeficit/jsx): A JSON encoder and decoder for Erlang.
 
-**Note**: Replace `$(pwd)/init.sql` with the path to your SQL script for initializing the database.
+## JavaScript Libraries:
+- React: [https://unpkg.com/react@17/umd/react.production.min.js](https://unpkg.com/react@17/umd/react.production.min.js)
+- ReactDOM: [https://unpkg.com/react-dom@17/umd/react-dom.production.min.js](https://unpkg.com/react-dom@17/umd/react-dom.production.min.js)
+- Babel Standalone: [https://unpkg.com/babel-standalone@6/babel.min.js](https://unpkg.com/babel-standalone@6/babel.min.js)
+- Axios: [https://unpkg.com/axios/dist/axios.min.js](https://unpkg.com/axios/dist/axios.min.js)
 
----
-Feel free to update this README with more specific details about your application as needed. Happy coding!
+## CSS Library:
+- Bootstrap: [https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css](https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css)
