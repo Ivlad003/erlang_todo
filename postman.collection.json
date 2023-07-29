@@ -1,0 +1,68 @@
+{
+    "info": {
+        "name": "Todo API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get all todos",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/todo",
+                    "host": ["{{url}}"],
+                    "path": ["todo"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Create a todo",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"value\": \"Buy groceries\",\n    \"isChecked\": false\n}"
+                },
+                "url": {
+                    "raw": "{{url}}/todo",
+                    "host": ["{{url}}"],
+                    "path": ["todo"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Update a todo",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"isChecked\": true\n}"
+                },
+                "url": {
+                    "raw": "{{url}}/todo/1",
+                    "host": ["{{url}}"],
+                    "path": ["todo", "1"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Delete a todo",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/todo/1",
+                    "host": ["{{url}}"],
+                    "path": ["todo", "1"]
+                }
+            },
+            "response": []
+        }
+    ]
+}

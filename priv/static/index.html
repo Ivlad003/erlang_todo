@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Todo List</title>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        class TodoList extends React.Component {
+            state = {
+                newTodo: "",
+                todos: [],
+            };
+
+            async componentDidMount() {
+                try {
+                    const response = await axios.get("/todo");
+                    if (Array.isArray(response.data)) {
+                        this.setState({ todos: response.data });
+                    } else {
+                        console.error(
+                            "Data received from /todo endpoint is not an array:",
+                            response.data
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error fetching todos:", error);
+                }
+            }
+
+            handleInputChange = (event) => {
+                this.setState({ newTodo: event.target.value });
+            };
+
+            handleFormSubmit = async (event) => {
+                event.preventDefault();
+                // Check if newTodo state is not empty
+                if (this.state.newTodo.trim() !== "") {
+                    await axios.post("/todo", {
+                        value: this.state.newTodo,
+                    });
+
+                    const response = await axios.get("/todo");
+
+                    this.setState((state) => ({
+                        todos: [...response.data],
+                        newTodo: "",
+                    }));
+                } else {
+                    // You can alert the user or handle the empty input scenario here
+                    alert("Please enter a todo item");
+                }
+            };
+
+            handleRemove = async (id) => {
+                try {
+                    await axios.delete(`/todo/${id}`);
+                    this.setState((state) => ({
+                        todos: state.todos.filter((todo) => todo.id !== id),
+                    }));
+                } catch (error) {
+                    console.error(`Error removing todo with id ${id}:`, error);
+                }
+            };
+
+            handleCheck = async (id) => {
+                try {
+                    const isChecked = !this.state.todos.find((todo) => todo.id === id).isChecked;
+                    await axios.put(`/todo/${id}`, { isChecked });
+                    this.setState((state) => ({
+                        todos: state.todos.map((todo) =>
+                            todo.id === id ? { ...todo, isChecked } : todo
+                        ),
+                    }));
+                } catch (error) {
+                    console.error(`Error checking todo with id ${id}:`, error);
+                }
+            };
+
+            render() {
+                return (
+                    <div>
+                        <h1>Todo List</h1>
+                        <form onSubmit={this.handleFormSubmit}>
+                            <input
+                                type="text"
+                                value={this.state.newTodo}
+                                onChange={this.handleInputChange}
+                                placeholder="New todo"
+                                className="form-control"
+                            />
+                            <button type="submit" className="btn btn-primary">
+                                Add
+                            </button>
+                        </form>
+                        <ul className="list-group">
+                            {this.state.todos
+                                .sort((a, b) => a.isChecked - b.isChecked)
+                                .map((todo) => (
+                                    <li
+                                        key={todo.id}
+                                        className="list-group-item d-flex justify-content-between"
+                                        style={{
+                                            backgroundColor: todo.isChecked
+                                                ? "lightgreen"
+                                                : "white",
+                                        }}
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={todo.isChecked}
+                                            onChange={() => this.handleCheck(todo.id)}
+                                        />
+                                        {todo.value}
+                                        <button onClick={() => this.handleRemove(todo.id)}>
+                                            Remove
+                                        </button>
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<TodoList />, document.getElementById("app"));
+    </script>
+</body>
+
+</html>

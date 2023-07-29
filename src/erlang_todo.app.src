@@ -1,0 +1,19 @@
+{application, erlang_todo,
+ [{description, "Erlang Todo Application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, {erlang_todo_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    cowboy,
+    epgsql,
+    jsx
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, []},
+  {links, {}}
+ ]}.

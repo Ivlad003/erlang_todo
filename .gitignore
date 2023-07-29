@@ -1,0 +1,35 @@
+# Compiled source #
+###################
+*.beam
+*.app
+
+# Dependency directory #
+#######################
+deps/
+
+# Build artifacts #
+###################
+ebin/
+_build/
+rel/
+
+# Logs #
+########
+erl_crash.dump
+
+# Backup files #
+################
+*~
+
+# Other #
+#########
+*.swp
+*.swo
+*.pid
+.DS_Store
+
+# IDE files #
+#############
+.idea/
+*.iml
+.history
