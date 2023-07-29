@@ -14,6 +14,8 @@
 
 Erlang Todo App is a simple todo list application built with Erlang and Cowboy web server. It allows users to manage their tasks by adding new tasks and marking existing tasks as completed.
 
+![Demo](demo.png)
+
 ## Project Structure
 
 ```
