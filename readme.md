@@ -1,5 +1,3 @@
-Sure! Here's an updated version of the README.md file with additional information about the Erlang libraries used in the project and how to include them in the index.html file:
-
 # Erlang Todo App
 
 ## Table of Contents
