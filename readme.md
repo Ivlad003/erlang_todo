@@ -53,19 +53,25 @@ Erlang Todo App is a simple todo list application built with Erlang and Cowboy w
 
 To run the application in production mode, follow these steps:
 
-1. Build the release:
+0. Run database instance:
+
+   ```
+   docker run --name db -e POSTGRES_DB=todo_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_PORT=5432 -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql -p 5432:5432 -d postgres:13
+   ```
+     
+2. Build the release:
 
    ```
    rebar3 release
    ```
 
-2. Start the application:
+3. Start the application:
 
    ```
    _build/default/rel/erlang_todo_release/bin/erlang_todo_release daemon
    ```
 
-3. Stop the application:
+4. Stop the application:
 
    ```
    _build/default/rel/erlang_todo_release/bin/erlang_todo_release stop
